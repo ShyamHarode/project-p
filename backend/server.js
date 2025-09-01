@@ -98,18 +98,22 @@ io.on('connection', (socket) => {
 });
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_URI)
 .then(() => {
-  console.log('Connected to MongoDB');
+  console.log('✅ Connected to MongoDB');
   server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`🚀 Server is running on port ${PORT}`);
+    console.log(`🌐 Frontend URL: ${process.env.FRONTEND_URL || 'http://localhost:3000'}`);
+    console.log(`📊 API Health Check: http://localhost:${PORT}/api/health`);
   });
 })
 .catch((error) => {
-  console.error('Database connection error:', error);
+  console.error('❌ Database connection error:', error.message);
+  console.log('\n🔧 MongoDB Setup Instructions:');
+  console.log('1. Install MongoDB: https://docs.mongodb.com/manual/installation/');
+  console.log('2. Start MongoDB service: brew services start mongodb/brew/mongodb-community');
+  console.log('3. Or use MongoDB Atlas: https://cloud.mongodb.com/');
+  console.log('4. Update MONGODB_URI in .env file\n');
   process.exit(1);
 });
 

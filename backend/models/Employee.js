@@ -77,11 +77,7 @@ const employeeSchema = new mongoose.Schema({
   toObject: { virtuals: true }
 });
 
-// Indexes for better performance
-employeeSchema.index({ email: 1 });
-employeeSchema.index({ employeeId: 1 });
-employeeSchema.index({ role: 1 });
-employeeSchema.index({ isActive: 1 });
+// Note: Indexes are automatically created from unique fields in schema
 
 // Pre-save middleware to generate employee ID
 employeeSchema.pre('save', async function(next) {

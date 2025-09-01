@@ -97,10 +97,7 @@ userSchema.virtual('postsCount').get(function() {
   return this.posts.length;
 });
 
-// Indexes for better performance
-userSchema.index({ email: 1 });
-userSchema.index({ username: 1 });
-userSchema.index({ role: 1 });
+// Note: Indexes are automatically created from unique fields in schema
 
 // Pre-save middleware to hash password
 userSchema.pre('save', async function(next) {
